@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 600,
+      height: 500,
       child: ListView.builder(
         itemCount: _userTransaction.length,
         itemBuilder: (context, index) {
@@ -25,9 +25,6 @@ class TransactionList extends StatelessWidget {
             ),
           );
         },
-        // children: _userTransaction.map((transaction) {
-        //   return
-        // }).toList(),
       ),
     );
   }
@@ -48,14 +45,14 @@ class AmountContainer extends StatelessWidget {
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.purple,
+          color: Theme.of(context).primaryColorDark,
           width: 2,
         ),
       ),
       child: Text(
         '\$' + _amount.toStringAsFixed(2),
         style: TextStyle(
-          color: Colors.purple,
+          color: Theme.of(context).primaryColorDark,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
