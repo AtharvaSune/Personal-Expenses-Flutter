@@ -1,3 +1,4 @@
+import 'package:PersonalExpenses/widgets/chart-bars.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 
@@ -18,6 +19,11 @@ class Chart extends StatelessWidget {
     };
 
     return dayMap[day.weekday.toString()];
+  }
+
+  double get weeklyTotalAmount {
+    return weeklyTransactionList.fold(
+        0.0, (sum, element) => sum + element['amount']);
   }
 
   List<Map<String, Object>> get weeklyTransactionList {
@@ -53,8 +59,16 @@ class Chart extends StatelessWidget {
     print(recentTransaction);
 
     return Card(
-        child: Row(children: <Widget>[
-      Column(children: <Widget>[Text("HI"), Container(), Text("HI")])
-    ]));
+      child: Row(
+        children: recentTransaction.map((tx) {
+          return ChartBars(
+              tx['day'],
+              tx['amount'],
+              weeklyTotalAmount == 0.0
+                  ? 0.0
+                  : (tx['amount'] as double) / weeklyTotalAmount);
+        }).toList(),
+      ),
+    );
   }
 }
